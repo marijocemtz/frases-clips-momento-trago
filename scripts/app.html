@@ -46,11 +46,21 @@ header p { margin: 4px 0 0; font-weight: 500; }
 .btn:active, .tab:active, .mano:active, .acc:active, .chip:active { transform: scale(0.96); }
 button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 main .in { padding-block: 20px 60px; display: flex; flex-direction: column; gap: 12px; }
+#v-por { max-width: 1040px; }
 .resumen { color: var(--muted); font-size: 15px; }
-.frase { border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; align-items: center; background: var(--card);
+#ronda { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+.frase { border: 1.5px solid var(--linea); border-radius: 16px; padding: 6px; display: flex; flex-direction: column; gap: 8px; background: var(--card); min-width: 0;
   transition: border-color 160ms ease, background-color 160ms ease; }
-.frase .texto { min-width: 0; font-weight: 500; }
+.frase .manos { justify-content: center; }
 .img { font-size: 14px; color: var(--azul-fuerte); font-weight: 600; margin-top: 2px; }
+/* Pantalla de reel: así se ve el texto encima del clip. */
+.reel { position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 12px; overflow: hidden; padding: 18% 8px 8px;
+  background: radial-gradient(120% 70% at 50% 105%, #1d4f86 0%, #0c1726 55%, #04070b 100%); display: flex; flex-direction: column; align-items: center; }
+.reel::after { content: ""; position: absolute; left: 50%; bottom: 13%; width: 52%; aspect-ratio: 3 / 1; transform: translateX(-50%); border-radius: 8px;
+  background: linear-gradient(#27323c, #10151a); box-shadow: 0 0 34px rgba(55,173,251,.4); }
+.reel p { position: relative; z-index: 1; margin: 0; text-align: center; color: #fff; font-weight: 800; font-size: clamp(14px, 3.8vw, 17px); line-height: 1.2;
+  text-shadow: 0 0 3px #000, 0 1px 2px #000; white-space: pre-line; overflow-wrap: anywhere; }
+.reel .img { position: relative; z-index: 1; color: #ffd76a; text-align: center; font-size: 12px; margin-top: 8px; }
 .frase.si { border-color: var(--si); background: var(--si-suave); }
 .frase.no { border-color: var(--no); background: var(--no-suave); }
 .manos { display: flex; gap: 6px; }
@@ -160,7 +170,8 @@ textarea { resize: vertical; min-height: 44px; }
   }
   function filaRonda(f) {
     const row = el("div", "frase" + (f.estado === "si" ? " si" : f.estado === "no" ? " no" : ""));
-    const txt = el("div", "texto", f.t); if (f.img) txt.append(el("div", "img", "🖼 " + f.img));
+    const txt = el("div", "reel"); txt.append(el("p", "", f.t.replace(/ \/ /g, "\n")));
+    if (f.img) txt.append(el("div", "img", "🖼 " + f.img));
     const manos = el("div", "manos");
     const up = el("button", "mano up", "👍"), down = el("button", "mano down", "👎");
     up.setAttribute("aria-label", "Me gusta"); down.setAttribute("aria-label", "No me gusta");
