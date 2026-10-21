@@ -1,1 +1,9 @@
-{"modelo": "haiku", "prueba_inicio": null, "prueba_dias": 30, "umbral_rondas": 3, "umbral_dislike": 0.5, "rechazado_en": null, "tope_reglas": 40}
+{
+ "modelo": "haiku",
+ "prueba_inicio": "2026-10-21T00:33:38",
+ "prueba_dias": 30,
+ "umbral_rondas": 3,
+ "umbral_dislike": 0.5,
+ "rechazado_en": null,
+ "tope_reglas": 40
+}
