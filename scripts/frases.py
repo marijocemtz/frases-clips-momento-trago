@@ -170,6 +170,13 @@ def cmd_prompt(a):
 
 
 # ---------- cargar ----------
+def sin_dos_puntos(t):
+    """Un POV o un "Cuando…" de un renglón no cierra con ":" (el clip es la escena)."""
+    if "/" in t or "\n" in t or not re.match(r"(pov\b|(c[oó]mo )?cuando\b)", t, re.I):
+        return t
+    return re.sub(r"\s*:(\s*[^\w\s\"'”»)]*)$", r"\1", t)
+
+
 def cmd_cargar(_):
     sal = os.path.join(SESION, "salida.jsonl")
     pedido = leer(os.path.join(SESION, "pedido.json"))
@@ -184,7 +191,7 @@ def cmd_cargar(_):
             o = json.loads(linea)
         except ValueError:
             continue
-        t = str(o.get("t") or o.get("texto") or "").strip()
+        t = sin_dos_puntos(str(o.get("t") or o.get("texto") or "").strip())
         if not t:
             continue
         img = str(o.get("img") or "").strip()

@@ -28,12 +28,12 @@ Cada una con textos reales de DJs mexicanos y sus vistas. Copia el molde, nunca 
    - "\"El que ponga la canción más bellaka gana\" / Yo en corto:" (3.2 M)
    - "Mi amigo vomitando afuera / La DJ:" (152 mil, 25 % de engagement)
    - "Nadie: / Mi Spotify en aleatorio:" (1.5 M)
-3. **POV con premisa concreta y absurda.** El POV solo funciona si el lugar o la situación es específica.
+3. **POV con premisa concreta y absurda.** El POV solo funciona si el lugar o la situación es específica. **Nunca termina en dos puntos:** el POV ya trae los suyos al principio y el clip es la escena (44 de 46 POV del banco cierran sin ":").
    - "POV: eres el DJ de la facultad de psicología" (7.9 M; arquitectura: 3.2 M)
    - "pov: aimep3 llegó a mis xv y fue la dj" (4.6 M)
    - "pov: tocas en Monterrey y haces esto.." (6.5 M)
    - No: "POV: es sábado y eres DJ" (8 mil), "POV. Eres DJ y haces esto 😂😂😂".
-4. **"Cuando…" con un momento exacto que todos reconocen.**
+4. **"Cuando…" con un momento exacto que todos reconocen.** Tampoco termina en dos puntos (22 de 24 del banco cierran sin ":").
    - "CUANDO EL DJ SABE EN QUÉ MOMENTO BAJAR LA MÚSICA" (18.3 M, el más visto del banco)
    - "Cuando la mezcla estuvo tan rara que estuvo buena" (4.8 M)
    - "Cuando el dj vuelve al mejor reggaetón del 2004" (2.6 M)
@@ -82,7 +82,7 @@ Cada una con textos reales de DJs mexicanos y sus vistas. Copia el molde, nunca 
 - Principalmente el corazón azul 💙 (es la firma de TRAGO., el azulito) y los monitos 🙈 / 🙊.
 - Combinaciones típicas: 🙊💙, 🙈💙 o solo 💙. 🙈 es coqueteo o "ay no"; 🙊 es complicidad, secreto o picardía. Elige el que vaya con el chiste.
 - De vez en cuando, y solo uno, puede entrar ✨, 🔥, 😱 o 👀, siempre junto a 💙.
-- Si la frase termina en dos puntos para que el drop la complete, el emoji va después de los dos puntos ("La señal: 🙊💙").
+- Si la frase termina en dos puntos para que el drop la complete, el emoji va después de los dos puntos ("La señal: 🙊💙"). Si no lleva dos puntos, el emoji va directo al final, sin ponerle ":" antes ("POV: eres el DJ de la facultad de psicología 🙊💙").
 - No llenes de emojis: menos es más. Las frases del banco vienen sin emojis; tú sí se los pones.
 - La marca se escribe siempre "TRAGO." con punto (si va a mitad de frase también: "en TRAGO. de jueves a domingo").
 
@@ -96,7 +96,7 @@ Es la fórmula 1 con un molde que ya pegaba afuera ("LAS MEZCLAS DEL DJ QUE LE P
 - Regla: la temática es el CONTEXTO, no el chiste. Solo unas cuantas frases la tocan directo y de forma natural; las demás viven en ese ambiente sin repetir su vocabulario. Cada frase necesita una situación reconocible; el giro lo pone el clip.
 
 ## Reparto en cada ronda (sin etiquetarlas)
-- Mínimo 8 de cada 10 terminan en dos puntos o son un "Yo: … / La DJ:" que el video completa.
+- Todas dejan el final al clip, pero los dos puntos al final solo van en las fórmulas 1, 2, 5 y 6 (premisa + dos puntos, diálogo, momento de la noche, pique). Un POV o un "Cuando…" nunca terminan en ":" (mal: "POV: tu tío se sabe el corrido completo y tú ni sabías:").
 - Usa al menos 4 de las 6 fórmulas por ronda y no repitas el mismo arranque más de 2 veces.
 - Públicos: meme universal (no conoce TRAGO. ni al DJ) · amigos que se etiquetan · cachorreo/ex/despecho · conocedores del perreo y las mezclas · comunidad TRAGO. Todas, incluidas las de meme universal, pasan la prueba sin video.
 - 2 o 3 con remate visual (imagen que completa el chiste).
