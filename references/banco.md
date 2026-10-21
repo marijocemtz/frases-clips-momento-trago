@@ -1,0 +1,43 @@
+# Banco de referencia
+Frases que ya usó TRAGO. Sirven para aprender el tono: no se copian ni se parafrasean. Vienen sin emojis.
+
+- Ni Beethoven se aventaba estas sinfonías:
+- Me preguntó mi canción favorita y yo solo pude ponerle esta joyita:
+- Pues juntos ya no estamos, pero esa noche de perreo en TRAGO. nadie me la quita, menos cuando suena:
+- Entre ser y no ser, yo soy más de perrear en TRAGO.:
+- Lo que suena en mi cabeza cuando me confiesa que le gusta el perreo:
+- Si ya te la sabes, ¿pa' qué te haces? TRAGO. te encanta, ya no le saques:
+- Yo le rezo solo a tres cosas: a Dios, a mi madre y a este DJ:
+- El ángel que ven mis ojos en TRAGO. cuando estoy a nada de desmayarme por falta de ambiente:
+- Cuando ella quiere empezar a pelear pero el DJ se pone creativo:
+- En el nombre del padre, del hijo y de la rola bendita de este DJ:
+- El DJ set que me dijo la tarotista que sonaría el día que mi alma gemela y yo nos íbamos a encontrar:
+- Cuando me preguntan si sé echar colado pero yo de mezclas solo sé las de TRAGO.:
+- Obvio no somos iguales: a ti te gustan los perros y a mí me encanta el perreo, más si suena:
+- Me dijo "te extraño" y yo lo único que extraño es ese perreo en TRAGO.:
+- Entonces Dios bajó y dijo:
+- Entre melón y melames, mejor perreamos en TRAGO. cuando el DJ arranque:
+- Ya te caché, mentirosillo: no querías estar solo, querías estar en TRAGO.
+- El día que me muera pongan este set, y si no me levanto a perrear entonces de verdad me les fui:
+- Pudimos ser felices los cuatro: tú, yo, TRAGO. y este set:
+- Me dijo: ¿eres más de serenatas? No, amor, yo soy más de perrear en TRAGO.
+- Con dinero baila el perro y con un TRAGO. bailas tú.
+- Fui al Oxxo y la chica me dice "¿Modelo?". No, reina, soy más de TRAGO.
+- Yo poniendo a prueba al que escucha de todo cuando suena:
+- Búscame en este set de TRAGO. cuando me extrañes:
+- Invítame a salir, no sé, como a TRAGO. con este set, ponte creativo o así:
+- Ni el chalán se avienta esta mezcla.
+- Le pido a Dios una señal. La señal:
+- Me hizo daño escuchar esto sin mi TRAGO.
+- Los himnos se cantan en TRAGO. de jueves a domingo.
+- Según el libro de la anatomía de TRAGO., rompieron con esa mezcla.
+- Ni el bolillo del súper está tan duro como esta mezcla.
+- Lo que pone el DJ cuando me da FOMO de ir:
+- cc cuando voy a TRAGO. y así me recibe el DJ:
+- En mi funeral no me lloren, pónganme esta mezcla.
+- Todas las real babys estarán en chambor/peda en la playa.
+- Los dos con el hocico azul y besarnos otra vez.
+- Esta mezcla, playa, trópicos, la churpia y que nadie te esté chingando.
+- Qué malo que te dejaste y justo es peda en la playa.
+- Lo que se avienta el DJ cuando le sueltas uno de $20:
+- Yo después de un TRAGO. poniéndome cachorrón:

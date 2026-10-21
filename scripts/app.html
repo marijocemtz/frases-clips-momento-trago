@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRASES CLIPS MOMENTO TRAGO.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root {
+  --bg: #ffffff; --bg-2: #f4f9fd; --fg: #0f1f2b; --muted: #587080;
+  --azul: #37ADFB; --azul-fuerte: #0d8fe6; --azul-suave: #e6f4fe; --linea: #d9e8f2; --card: #ffffff;
+  --si: #16a05a; --si-suave: #e4f6ec; --no: #dc4343; --no-suave: #fdeaea;
+  --sombra: 0 1px 2px rgba(15,31,43,.06), 0 8px 24px rgba(13,143,230,.08);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --font: "Outfit", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a1219; --bg-2: #0f1a24; --fg: #e8f1f8; --muted: #8fa5b5;
+    --azul: #4db8ff; --azul-fuerte: #4db8ff; --azul-suave: #102a3d; --linea: #1d3141; --card: #111e29;
+    --si: #4cc483; --si-suave: #0f2a1d; --no: #f07b7b; --no-suave: #2e1515; --sombra: 0 1px 2px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 17px; line-height: 1.5; }
+[hidden] { display: none !important; }
+header { background: #37ADFB; color: #fff; }
+.in { max-width: 820px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header .in { padding-block: 26px 22px; display: flex; flex-direction: column; gap: 6px; }
+header small { font-weight: 700; letter-spacing: .08em; font-size: 14px; opacity: .9; }
+header h1 { margin: 0; font-size: clamp(30px, 6vw, 46px); font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+header p { margin: 4px 0 0; font-weight: 500; }
+.barra { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--linea); }
+.barra .in { padding-block: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.tabs { display: flex; gap: 4px; background: var(--bg-2); padding: 4px; border-radius: 99px; }
+.tab { border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 600; font-size: 15px; padding: 7px 14px; border-radius: 99px; cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms var(--ease); }
+.tab[aria-selected="true"] { background: var(--card); color: var(--fg); box-shadow: var(--sombra); }
+.tab b { font-weight: 500; opacity: .7; margin-left: 3px; }
+.btn { border: 0; font: inherit; font-weight: 700; cursor: pointer; border-radius: 99px; padding: 9px 22px; background: var(--azul); color: #fff;
+  transition: transform 160ms var(--ease), opacity 160ms ease; }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn:active, .tab:active, .mano:active, .acc:active, .chip:active { transform: scale(0.96); }
+button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+main .in { padding-block: 20px 60px; display: flex; flex-direction: column; gap: 12px; }
+.resumen { color: var(--muted); font-size: 15px; }
+.frase { border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; align-items: center; background: var(--card);
+  transition: border-color 160ms ease, background-color 160ms ease; }
+.frase .texto { min-width: 0; font-weight: 500; }
+.img { font-size: 14px; color: var(--azul-fuerte); font-weight: 600; margin-top: 2px; }
+.frase.si { border-color: var(--si); background: var(--si-suave); }
+.frase.no { border-color: var(--no); background: var(--no-suave); }
+.manos { display: flex; gap: 6px; }
+.mano { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--linea); background: var(--card); font-size: 18px; cursor: pointer; display: grid; place-items: center;
+  transition: transform 160ms var(--ease), background-color 160ms ease, border-color 160ms ease; }
+.mano[aria-pressed="true"].up { background: var(--si); border-color: var(--si); }
+.mano[aria-pressed="true"].down { background: var(--no); border-color: var(--no); }
+.porque { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; }
+.porque label { font-size: 14px; font-weight: 600; color: var(--no); }
+textarea, input[type=text] { font: inherit; font-size: 15px; color: var(--fg); background: var(--card); border: 1px solid var(--linea); border-radius: 10px; padding: 8px 10px; width: 100%; }
+textarea { resize: vertical; min-height: 44px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1.5px solid transparent; background: var(--azul-suave); color: var(--azul-fuerte); font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 12px; font-size: 15px; cursor: pointer;
+  transition: transform 160ms var(--ease), border-color 160ms ease, background-color 160ms ease, color 160ms ease; }
+.chip b { font-weight: 500; opacity: .75; margin-left: 4px; }
+.chip[aria-pressed="true"] { border-color: var(--azul); }
+.chip.encima { background: var(--azul); color: #fff; transform: scale(1.05); }
+.chip.nueva { background: transparent; border: 1.5px dashed var(--linea); color: var(--muted); }
+.nueva-form { display: flex; gap: 8px; }
+.nueva-form input { max-width: 260px; }
+.ayuda { font-size: 14px; color: var(--muted); margin: 0; }
+.aprob { display: grid; grid-template-columns: auto 1fr; gap: 8px 10px; align-items: center; border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; background: var(--card);
+  cursor: grab; transition: opacity 160ms ease, border-color 160ms ease; }
+.aprob.arrastrando { opacity: .4; border-style: dashed; }
+.aprob .texto { min-width: 0; font-weight: 500; }
+.donde { font-size: 13px; color: var(--muted); font-weight: 500; }
+.asa { color: var(--muted); font-size: 18px; letter-spacing: -2px; user-select: none; }
+.acciones { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.acc { border: 1px solid var(--linea); background: var(--card); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; border-radius: 99px; padding: 5px 12px; cursor: pointer;
+  transition: transform 160ms var(--ease), background-color 160ms ease, color 160ms ease; }
+.acc.estrella { font-size: 16px; padding: 3px 10px; color: var(--linea); }
+.acc.estrella[aria-pressed="true"] { color: #f5a524; }
+.acc.tirar:hover { background: var(--no-suave); color: var(--no); }
+.acc.copiado { background: var(--si-suave); color: var(--si); }
+.vacio { text-align: center; color: var(--muted); padding: 30px 10px; border: 1.5px dashed var(--linea); border-radius: 14px; }
+.toast { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 99px; font-weight: 600; font-size: 15px;
+  transition: opacity 200ms ease, transform 200ms var(--ease); }
+.toast.oculto { opacity: 0; transform: translate(-50%, 8px); pointer-events: none; }
+.fin { text-align: center; padding: 60px 16px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.fin h2 { margin: 0; font-size: 32px; font-weight: 800; }
+.fin p { margin: 0; color: var(--muted); max-width: 40ch; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header><div class="in"><small>FRASES CLIPS</small><h1>MOMENTO TRAGO.</h1><p id="sub">Cargando…</p></div></header>
+
+<div class="barra"><div class="in">
+  <div class="tabs" role="tablist">
+    <button class="tab" id="t-por" role="tab" aria-selected="true">Por aprobar <b id="n-por"></b></button>
+    <button class="tab" id="t-apr" role="tab" aria-selected="false">Aprobadas <b id="n-apr"></b></button>
+  </div>
+  <button class="btn" id="terminar">Terminé</button>
+</div></div>
+
+<main>
+  <div class="in" id="v-por">
+    <p class="resumen" id="resumen"></p>
+    <div id="ronda"></div>
+  </div>
+  <div class="in" id="v-apr" hidden>
+    <div class="chips" id="listas"></div>
+    <form class="nueva-form" id="nueva-form" hidden><input type="text" id="nueva-nombre" placeholder="Nombre de la lista" maxlength="60"><button class="btn" type="submit">Crear</button></form>
+    <p class="ayuda">Arrastra una frase a una lista de arriba o usa "Mover a…".</p>
+    <div id="aprobadas" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+  <div class="fin" id="fin" hidden>
+    <h2>Listo 💙</h2>
+    <p>Ya puedes cerrar esta pestaña. Regresa a Claude: ahí te enseño las reglas nuevas.</p>
+  </div>
+</main>
+<div class="toast oculto" id="toast"></div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  let ronda = [], aprobadas = [], listas = [], filtro = "", arrastrada = null;
+
+  const post = (ruta, d) => fetch(ruta, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) })
+    .then((r) => r.json()).catch(() => { toast("No se pudo guardar: ¿se cerró la página en Claude?"); return { error: true }; });
+  const toast = (t) => { const x = $("toast"); x.textContent = t; x.classList.remove("oculto"); clearTimeout(toast.t); toast.t = setTimeout(() => x.classList.add("oculto"), 2200); };
+
+  async function cargar() {
+    const e = await fetch("/api/estado").then((r) => r.json());
+    ronda = e.ronda || []; aprobadas = e.aprobadas || []; listas = e.listas || [];
+    const p = e.pedido || {};
+    $("sub").textContent = p.tema ? "Temática: " + p.tema + (p.contexto ? " · " + p.contexto : "") : "Tu banco de aprobadas";
+    if (!ronda.length) { $("t-por").hidden = true; ver("t-apr"); }
+    pintarRonda(); pintarAprob();
+  }
+
+  function ver(t) {
+    ["t-por", "t-apr"].forEach((o) => { $(o).setAttribute("aria-selected", String(o === t)); });
+    $("v-por").hidden = t !== "t-por"; $("v-apr").hidden = t !== "t-apr";
+  }
+  $("t-por").onclick = () => ver("t-por");
+  $("t-apr").onclick = () => ver("t-apr");
+
+  // ---------- Por aprobar ----------
+  function pintarRonda() {
+    const box = $("ronda"); box.textContent = "";
+    const si = ronda.filter((f) => f.estado === "si").length, no = ronda.filter((f) => f.estado === "no").length;
+    $("n-por").textContent = String(ronda.length - si - no);
+    $("resumen").textContent = ronda.length + " frases · " + si + " 👍 · " + no + " 👎 · las que no califiques se borran al picar Terminé";
+    ronda.forEach((f) => box.append(filaRonda(f)));
+  }
+  function filaRonda(f) {
+    const row = el("div", "frase" + (f.estado === "si" ? " si" : f.estado === "no" ? " no" : ""));
+    const txt = el("div", "texto", f.t); if (f.img) txt.append(el("div", "img", "🖼 " + f.img));
+    const manos = el("div", "manos");
+    const up = el("button", "mano up", "👍"), down = el("button", "mano down", "👎");
+    up.setAttribute("aria-label", "Me gusta"); down.setAttribute("aria-label", "No me gusta");
+    up.setAttribute("aria-pressed", String(f.estado === "si")); down.setAttribute("aria-pressed", String(f.estado === "no"));
+    up.onclick = () => calificar(f, f.estado === "si" ? null : "si");
+    down.onclick = () => calificar(f, f.estado === "no" ? null : "no", true);
+    manos.append(up, down); row.append(txt, manos);
+    if (f.estado === "no") {
+      const caja = el("div", "porque");
+      const lab = el("label", "", "¿Por qué no está chida?");
+      const ta = el("textarea"); ta.rows = 2; ta.placeholder = "Ej. ya está muy vista"; ta.value = f.razon || "";
+      ta.id = "razon-" + f.id; lab.htmlFor = ta.id;
+      let t; ta.oninput = () => { clearTimeout(t); t = setTimeout(() => { f.razon = ta.value; post("/api/calificar", { id: f.id, estado: "no", razon: ta.value }); }, 400); };
+      caja.append(lab, ta); row.append(caja);
+      if (f._enfocar) { setTimeout(() => ta.focus(), 0); f._enfocar = false; }
+    }
+    return row;
+  }
+  async function calificar(f, estado, enfocar) {
+    f.estado = estado; if (estado !== "no") f.razon = ""; f._enfocar = !!enfocar;
+    pintarRonda();
+    await post("/api/calificar", { id: f.id, estado, razon: f.razon || "" });
+    const e = await fetch("/api/estado").then((r) => r.json()); aprobadas = e.aprobadas || []; pintarAprob();
+  }
+
+  // ---------- Aprobadas ----------
+  function pintarListas() {
+    const box = $("listas"); box.textContent = "";
+    const todas = el("button", "chip", "Todas"); todas.append(el("b", "", String(aprobadas.length)));
+    todas.setAttribute("aria-pressed", String(filtro === "")); todas.onclick = () => { filtro = ""; pintarAprob(); };
+    box.append(todas);
+    const fav = el("button", "chip", "★ Favoritas"); fav.append(el("b", "", String(aprobadas.filter((g) => g.fav).length)));
+    fav.setAttribute("aria-pressed", String(filtro === "*")); fav.onclick = () => { filtro = "*"; pintarAprob(); };
+    box.append(fav);
+    listas.forEach((l) => {
+      const c = el("button", "chip", l.nombre); c.append(el("b", "", String(aprobadas.filter((g) => g.lista === l.id).length)));
+      c.setAttribute("aria-pressed", String(filtro === l.id));
+      c.onclick = () => { filtro = l.id; pintarAprob(); };
+      c.addEventListener("dragover", (e) => { e.preventDefault(); c.classList.add("encima"); });
+      c.addEventListener("dragleave", () => c.classList.remove("encima"));
+      c.addEventListener("drop", (e) => { e.preventDefault(); c.classList.remove("encima"); if (arrastrada) mover(arrastrada, l.id); });
+      box.append(c);
+    });
+    const nueva = el("button", "chip nueva", "+ Nueva lista");
+    nueva.onclick = () => { $("nueva-form").hidden = false; $("nueva-nombre").focus(); };
+    box.append(nueva);
+    if (filtro && filtro !== "*") {
+      const borrar = el("button", "chip nueva", "Borrar esta lista");
+      borrar.onclick = async () => {
+        if (borrar.dataset.seguro !== "1") { borrar.dataset.seguro = "1"; borrar.textContent = "¿Seguro? Pica otra vez"; return; }
+        await post("/api/borrar-lista", { id: filtro });
+        listas = listas.filter((l) => l.id !== filtro);
+        aprobadas.forEach((g) => { if (g.lista === filtro) g.lista = ""; });
+        filtro = ""; toast("Lista borrada; sus frases siguen en Todas"); pintarAprob();
+      };
+      box.append(borrar);
+    }
+  }
+  $("nueva-form").onsubmit = async (e) => {
+    e.preventDefault();
+    const nombre = $("nueva-nombre").value.trim(); if (!nombre) return;
+    const r = await post("/api/lista", { nombre });
+    if (r.ok) { listas.push({ id: r.id, nombre }); $("nueva-nombre").value = ""; $("nueva-form").hidden = true; toast("Creaste " + nombre); pintarAprob(); }
+  };
+  async function mover(g, lista) {
+    g.lista = lista; pintarAprob();
+    await post("/api/aprobada", { id: g.id, lista });
+    const l = listas.find((x) => x.id === lista); toast(l ? "Movida a " + l.nombre : "Sacada de la lista");
+  }
+  function pintarAprob() {
+    pintarListas();
+    $("n-apr").textContent = String(aprobadas.length);
+    const box = $("aprobadas"); box.textContent = "";
+    const orden = aprobadas.slice().sort((a, b) => (b.creada || "").localeCompare(a.creada || ""));
+    const visibles = orden.filter((g) => !filtro || (filtro === "*" ? g.fav : g.lista === filtro));
+    visibles.forEach((g) => {
+      const row = el("div", "aprob"); row.draggable = true;
+      const txt = el("div", "texto", g.t);
+      if (g.img) txt.append(el("div", "img", "🖼 " + g.img));
+      const l = listas.find((x) => x.id === g.lista);
+      txt.append(el("div", "donde", (l ? "En " + l.nombre : "Sin lista") + (g.tema ? " · " + g.tema : "") + (g.autor ? " · " + g.autor : "")));
+      row.append(el("span", "asa", "⋮⋮"), txt);
+      const acc = el("div", "acciones");
+      const copiar = el("button", "acc", "Copiar");
+      copiar.onclick = async () => {
+        try { await navigator.clipboard.writeText(g.t + (g.img ? "\n[IMAGEN: " + g.img + "]" : "")); copiar.textContent = "Copiada"; copiar.classList.add("copiado"); }
+        catch { copiar.textContent = "Selecciónala a mano"; }
+        setTimeout(() => { copiar.textContent = "Copiar"; copiar.classList.remove("copiado"); }, 1600);
+      };
+      const est = el("button", "acc estrella", "★"); est.setAttribute("aria-pressed", String(!!g.fav)); est.setAttribute("aria-label", "Favorita");
+      est.onclick = () => { g.fav = !g.fav; est.setAttribute("aria-pressed", String(g.fav)); post("/api/aprobada", { id: g.id, fav: g.fav }); pintarListas(); };
+      const sel = el("select", "acc"); sel.setAttribute("aria-label", "Mover a otra lista");
+      sel.append(new Option("Mover a…", ""));
+      listas.forEach((x) => { if (x.id !== g.lista) sel.append(new Option(x.nombre, x.id)); });
+      if (g.lista) sel.append(new Option("Sacar de la lista", "-"));
+      sel.onchange = () => mover(g, sel.value === "-" ? "" : sel.value);
+      const tirar = el("button", "acc tirar", "🗑 Tirar"); tirar.setAttribute("aria-label", "Tirar a la basura");
+      tirar.onclick = async () => {
+        if (tirar.dataset.seguro !== "1") { tirar.dataset.seguro = "1"; tirar.textContent = "¿Seguro?"; setTimeout(() => { tirar.dataset.seguro = ""; tirar.textContent = "🗑 Tirar"; }, 2500); return; }
+        aprobadas = aprobadas.filter((x) => x !== g); pintarAprob();
+        await post("/api/tirar", { id: g.id }); toast("A la basura");
+        const f = ronda.find((x) => x.id === g.id); if (f) { f.estado = null; pintarRonda(); }
+      };
+      acc.append(copiar, est, sel, tirar); row.append(acc);
+      row.addEventListener("dragstart", (e) => { arrastrada = g; row.classList.add("arrastrando"); e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", g.t); });
+      row.addEventListener("dragend", () => { arrastrada = null; row.classList.remove("arrastrando"); });
+      box.append(row);
+    });
+    if (!visibles.length) box.append(el("div", "vacio", aprobadas.length ? "Esta lista está vacía. Arrastra frases aquí desde Todas." : "Todavía no hay aprobadas. Dale 👍 a las que te gusten."));
+  }
+
+  // ---------- Terminé ----------
+  $("terminar").onclick = async () => {
+    const sin = ronda.filter((f) => !f.estado).length;
+    if (sin && $("terminar").dataset.seguro !== "1") {
+      $("terminar").dataset.seguro = "1"; $("terminar").textContent = "Hay " + sin + " sin calificar. ¿Terminar?";
+      setTimeout(() => { $("terminar").dataset.seguro = ""; $("terminar").textContent = "Terminé"; }, 4000); return;
+    }
+    $("terminar").disabled = true;
+    await post("/api/terminar", {});
+    document.querySelector(".barra").hidden = true; $("v-por").hidden = true; $("v-apr").hidden = true; $("fin").hidden = false;
+  };
+
+  cargar().catch(() => { $("sub").textContent = "No pude conectar con Claude. Pídele que abra la página otra vez."; });
+})();
+</script>
+</body>
+</html>

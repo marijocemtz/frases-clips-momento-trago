@@ -1,0 +1,4 @@
+.sesion/
+*.tmp
+__pycache__/
+.DS_Store
