@@ -17,7 +17,7 @@ python3 "S/scripts/frases.py" inicio
 ## 2. Preguntas
 Pregunta con AskUserQuestion, todo en una sola llamada (solo lo que no te hayan dicho ya):
 - **Temática** (texto libre; da 3-4 ideas como opciones).
-- **Contexto** (opcional; ofrece "Sin contexto").
+- **¿Qué pasa en el clip?** (opcional; qué suena, qué hace la gente, quién es el DJ; ofrece "Sin contexto"). Va en `--contexto`.
 - **Cuántas**: 1, 10, 15, 20, 30 o la que escriban (máx. 100).
 - **% que se refiere al local TRAGO.**: 0, 20, 40, 60 o el que escriban (0-100). El script redondea al número de frases más cercano.
 
