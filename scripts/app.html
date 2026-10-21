@@ -46,9 +46,10 @@ header p { margin: 4px 0 0; font-weight: 500; }
 .btn:active, .tab:active, .mano:active, .acc:active, .chip:active { transform: scale(0.96); }
 button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 main .in { padding-block: 20px 60px; display: flex; flex-direction: column; gap: 12px; }
-#v-por { max-width: 1040px; }
+#v-por, #v-apr { max-width: 1040px; }
+.vacio { grid-column: 1 / -1; }
 .resumen { color: var(--muted); font-size: 15px; }
-#ronda { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+#ronda, #aprobadas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 12px; }
 .frase { border: 1.5px solid var(--linea); border-radius: 16px; padding: 6px; display: flex; flex-direction: column; gap: 8px; background: var(--card); min-width: 0;
   transition: border-color 160ms ease, background-color 160ms ease; }
 .frase .manos { justify-content: center; }
@@ -82,13 +83,12 @@ textarea { resize: vertical; min-height: 44px; }
 .nueva-form { display: flex; gap: 8px; }
 .nueva-form input { max-width: 260px; }
 .ayuda { font-size: 14px; color: var(--muted); margin: 0; }
-.aprob { display: grid; grid-template-columns: auto 1fr; gap: 8px 10px; align-items: center; border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; background: var(--card);
+.aprob { display: flex; flex-direction: column; gap: 8px; border: 1.5px solid var(--linea); border-radius: 16px; padding: 6px; background: var(--card); min-width: 0;
   cursor: grab; transition: opacity 160ms ease, border-color 160ms ease; }
 .aprob.arrastrando { opacity: .4; border-style: dashed; }
-.aprob .texto { min-width: 0; font-weight: 500; }
-.donde { font-size: 13px; color: var(--muted); font-weight: 500; }
-.asa { color: var(--muted); font-size: 18px; letter-spacing: -2px; user-select: none; }
-.acciones { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.donde { font-size: 13px; color: var(--muted); font-weight: 500; padding: 0 4px; }
+.acciones { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center; padding: 0 2px 4px; }
+.acciones select { max-width: 100%; }
 .acc { border: 1px solid var(--linea); background: var(--card); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; border-radius: 99px; padding: 5px 12px; cursor: pointer;
   transition: transform 160ms var(--ease), background-color 160ms ease, color 160ms ease; }
 .acc.estrella { font-size: 16px; padding: 3px 10px; color: var(--linea); }
@@ -125,7 +125,7 @@ textarea { resize: vertical; min-height: 44px; }
     <div class="chips" id="listas"></div>
     <form class="nueva-form" id="nueva-form" hidden><input type="text" id="nueva-nombre" placeholder="Nombre de la lista" maxlength="60"><button class="btn" type="submit">Crear</button></form>
     <p class="ayuda">Arrastra una frase a una lista de arriba o usa "Mover a…".</p>
-    <div id="aprobadas" style="display:flex;flex-direction:column;gap:10px"></div>
+    <div id="aprobadas"></div>
   </div>
   <div class="fin" id="fin" hidden>
     <h2>Listo 💙</h2>
@@ -160,6 +160,13 @@ textarea { resize: vertical; min-height: 44px; }
   $("t-por").onclick = () => ver("t-por");
   $("t-apr").onclick = () => ver("t-apr");
 
+  // Pantalla de reel: el texto encima como se vería en el clip.
+  function reel(f) {
+    const r = el("div", "reel"); r.append(el("p", "", f.t.replace(/ \/ /g, "\n")));
+    if (f.img) r.append(el("div", "img", "🖼 " + f.img));
+    return r;
+  }
+
   // ---------- Por aprobar ----------
   function pintarRonda() {
     const box = $("ronda"); box.textContent = "";
@@ -170,8 +177,7 @@ textarea { resize: vertical; min-height: 44px; }
   }
   function filaRonda(f) {
     const row = el("div", "frase" + (f.estado === "si" ? " si" : f.estado === "no" ? " no" : ""));
-    const txt = el("div", "reel"); txt.append(el("p", "", f.t.replace(/ \/ /g, "\n")));
-    if (f.img) txt.append(el("div", "img", "🖼 " + f.img));
+    const txt = reel(f);
     const manos = el("div", "manos");
     const up = el("button", "mano up", "👍"), down = el("button", "mano down", "👎");
     up.setAttribute("aria-label", "Me gusta"); down.setAttribute("aria-label", "No me gusta");
@@ -249,11 +255,8 @@ textarea { resize: vertical; min-height: 44px; }
     const visibles = orden.filter((g) => !filtro || (filtro === "*" ? g.fav : g.lista === filtro));
     visibles.forEach((g) => {
       const row = el("div", "aprob"); row.draggable = true;
-      const txt = el("div", "texto", g.t);
-      if (g.img) txt.append(el("div", "img", "🖼 " + g.img));
       const l = listas.find((x) => x.id === g.lista);
-      txt.append(el("div", "donde", (l ? "En " + l.nombre : "Sin lista") + (g.tema ? " · " + g.tema : "") + (g.autor ? " · " + g.autor : "")));
-      row.append(el("span", "asa", "⋮⋮"), txt);
+      row.append(reel(g), el("div", "donde", (l ? "En " + l.nombre : "Sin lista") + (g.tema ? " · " + g.tema : "") + (g.autor ? " · " + g.autor : "")));
       const acc = el("div", "acciones");
       const copiar = el("button", "acc", "Copiar");
       copiar.onclick = async () => {
