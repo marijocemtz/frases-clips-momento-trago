@@ -69,6 +69,7 @@ Si `guardado` no dice "subido al repo", explica en una línea qué pasó (sin in
 Cierra con una línea: cuántas aprobó y si quiere otra ronda.
 
 ## Reglas
+- El generador lee `references/reglas.md`, `references/banco.md` (frases de TRAGO.) y `references/banco-djs.md` (textos encima de DJs mexicanos, por fórmula; se arma desde el radar de competencia). Escribe de más con su nota y `cargar` se queda con las mejores.
 - Nunca leas `datos/` completo ni los dislikes viejos: los scripts ya dan la muestra.
 - No escribas frases en el chat: siempre van a la página.
 - TRAGO. y MOMENTO TRAGO. siempre con punto.

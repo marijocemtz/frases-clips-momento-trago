@@ -11,7 +11,7 @@ Comandos:
   guardar -m "mensaje"           sube datos y reglas al repo (con fila si alguien guardó antes)
   modelo haiku|sonnet|rechazar   cambia el modelo o rechaza la propuesta de cambio
 """
-import argparse, datetime, getpass, json, os, random, re, subprocess, sys, threading, time, webbrowser
+import argparse, datetime, difflib, getpass, json, os, random, re, subprocess, sys, threading, time, webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -132,9 +132,9 @@ def cmd_prompt(a):
     n = max(1, min(100, a.n))
     pct = max(0, min(100, a.pct))
     n_trago = round(n * pct / 100)
-    reglas = open(os.path.join(REFS, "reglas.md"), encoding="utf-8").read()
-    banco = open(os.path.join(REFS, "banco.md"), encoding="utf-8").read()
-    p = [reglas, "", banco]
+    cand = 3 if n == 1 else min(2 * n, n + 20)  # se escriben de más y cargar se queda con las mejores
+    c_trago = round(cand * pct / 100)
+    p = [open(os.path.join(REFS, f), encoding="utf-8").read() for f in ("reglas.md", "banco.md", "banco-djs.md")]
     m = muestra(a.tema)
     if m:
         p += ["", "# Aprobadas por el equipo (haz más con esta mecánica, sin repetirlas)"]
@@ -142,21 +142,31 @@ def cmd_prompt(a):
     previas = ya_salieron()
     if previas:
         p += ["", "# Ya salieron en rondas pasadas (no las repitas ni cambies solo palabras)"] + ["- " + t for t in previas]
-    if n_trago == 0:
+    if c_trago == 0:
         con = "ninguna menciona TRAGO."
-    elif n_trago == n:
+    elif c_trago == cand:
         con = "todas se refieren al local TRAGO. de forma natural"
     else:
-        con = "exactamente %d de %d se refieren al local TRAGO.; las otras %d no lo mencionan. Repártelas." % (n_trago, n, n - n_trago)
+        con = "exactamente %d de %d se refieren al local TRAGO.; las otras %d no lo mencionan. Repártelas." % (c_trago, cand, cand - c_trago)
     p += ["", "# Pedido de hoy",
           "Temática: " + a.tema,
           "Contexto: " + (a.contexto or "(sin contexto: frases para probar voz y públicos)"),
-          "Cantidad: " + ("1 sola frase, la mejor que tengas." if n == 1 else "%d frases." % n),
+          "Cantidad: %d candidatas. De ellas se quedan las %d mejores." % (cand, n),
           "Con TRAGO.: " + con,
+          "", "# Revisión (antes de escribir la salida)",
+          "Revisa cada candidata contra esto y ponle nota sin regalarla, comparándola con los textos de más vistas del banco de DJs:",
+          "1. Prueba sin video: ¿le falta el final y el clip se lo da? Si da risa sola, es un tuit: nota baja.",
+          "2. ¿Usa una de las 6 fórmulas? ¿El POV o el \"Cuando…\" cierran sin dos puntos?",
+          "3. ¿Máximo 12 palabras por renglón? ¿Se lee antes del drop?",
+          "4. ¿Suena como hablan los DJs del banco (cotidiano, concreto) y no a anuncio, chiste explicado o rima forzada?",
+          "5. ¿Habla del set, la pista o la noche, y no de otra cosa?",
+          "6. ¿Es distinta a los bancos, a las aprobadas y a lo que ya salió?",
+          "Si una falla, reescríbela hasta que pase o ponle nota baja; no la escondas.",
           "", "# Formato de salida (obligatorio)",
           "Una frase por línea, cada línea un objeto JSON y nada más; sin numerar, sin texto antes ni después:",
-          '{"t": "texto de la frase con sus emojis al final 🙊💙", "img": "", "trago": false}',
-          'Usa "img" solo si una imagen completa el chiste (descripción breve, ej. "vaso de TRAGO."). "trago" es true si la frase o su imagen se refieren al local.']
+          '{"t": "texto de la frase con sus emojis al final 🙊💙", "img": "", "trago": false, "nota": 7, "falla": ""}',
+          'Usa "img" solo si una imagen completa el chiste (descripción breve, ej. "vaso de TRAGO."). "trago" es true si la frase o su imagen se refieren al local.',
+          '"nota" va de 1 a 10 (10 = tan buena como los de millones de vistas del banco). "falla" dice en pocas palabras qué le falta ("" si nada).']
     os.makedirs(SESION, exist_ok=True)
     with open(os.path.join(SESION, "prompt.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(p) + "\n")
@@ -177,6 +187,39 @@ def sin_dos_puntos(t):
     return re.sub(r"\s*:(\s*[^\w\s\"'”»)]*)$", r"\1", t)
 
 
+def plano(t):
+    return " ".join(re.findall(r"\w+", re.sub(r"\(\d.*?\)$", "", t.lower())))
+
+
+def ejemplos():
+    """Las frases de los bancos, para no entregar una copia."""
+    out = []
+    for f in ("banco.md", "banco-djs.md"):
+        try:
+            out += [plano(l[2:]) for l in open(os.path.join(REFS, f), encoding="utf-8") if l.startswith("- ")]
+        except OSError:
+            pass
+    return out
+
+
+def revisar(f, refs):
+    """Nota final de una candidata, o None si es copia de un ejemplo. Renglón de más de 12 palabras resta 3."""
+    p = plano(f["t"])
+    if any(difflib.SequenceMatcher(None, p, r).ratio() > 0.8 for r in refs):
+        return None
+    largo = max(len(re.findall(r"\w+", r)) for r in re.split(r" / |\n", f["t"]))
+    return f["nota"] - (3 if largo > 12 else 0)
+
+
+def elegir(cands, n, n_trago):
+    """Las n mejores por nota, respetando cuántas llevan TRAGO."""
+    orden = sorted(cands, key=lambda f: -f["nota"])
+    con = [f for f in orden if f["trago"]][:n_trago]
+    sin = [f for f in orden if not f["trago"]][:n - len(con)]
+    resto = [f for f in orden if f not in con and f not in sin]
+    return (con + sin + resto)[:n]
+
+
 def cmd_cargar(_):
     sal = os.path.join(SESION, "salida.jsonl")
     pedido = leer(os.path.join(SESION, "pedido.json"))
@@ -195,16 +238,30 @@ def cmd_cargar(_):
         if not t:
             continue
         img = str(o.get("img") or "").strip()
+        try:
+            nota = float(o.get("nota", 5))
+        except (TypeError, ValueError):
+            nota = 5
         ronda.append({"id": nuevo_id(), "t": t, "img": img, "trago": o.get("trago") is True or "TRAGO" in t + img,
-                      "estado": None, "razon": ""})
+                      "estado": None, "razon": "", "nota": nota})
+    refs, copias = ejemplos(), 0
+    for f in ronda:
+        f["nota"] = revisar(f, refs)
+        copias += f["nota"] is None
+    ronda = [f for f in ronda if f["nota"] is not None]
     if not ronda:
         sys.exit("El generador no dejó ninguna frase válida.")
+    escritas = len(ronda) + copias
+    ronda = elegir(ronda, pedido.get("n", len(ronda)), pedido.get("n_trago", 0))
+    for f in ronda:
+        del f["nota"]
     escribir(os.path.join(SESION, "ronda.json"), {"id": nuevo_id(), "pedido": pedido, "frases": ronda})
     c = config()
     if not c["prueba_inicio"]:
         c["prueba_inicio"] = ahora()
         escribir(CONFIG, c)
-    print(json.dumps({"frases": len(ronda), "con_trago": sum(f["trago"] for f in ronda)}))
+    print(json.dumps({"frases": len(ronda), "con_trago": sum(f["trago"] for f in ronda), "escritas": escritas,
+                      "copias_descartadas": copias}))
 
 
 # ---------- servir ----------
